@@ -1,23 +1,41 @@
 from markupsafe import escape
 from flask import Flask, render_template, abort, request, url_for, flash, redirect
+from forms import CourseForm
 import os, datetime
 
 app = Flask(__name__)
 app.debug = True
 app.config['SECRET_KEY'] = '547f8a995c7b4ca6d44442005632cec674b55f300a9cd240'
 
+# Courses List
+courses_list = [{
+    'title': 'Python 101',
+    'description': 'Learn Python basics',
+    'price': 34,
+    'available': True,
+    'level': 'Beginner'
+    }]
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html')
 
-messages = [{'title': 'Message One',
-             'content': 'Message One Content'},
-            {'title': 'Message Two',
-             'content': 'Message Two Content'}
-            ]
 @app.route('/')
 def index():
-    return render_template('index.html', messages=messages)
+    return render_template('index.html', courses_list=courses_list)
+
+@app.route('/create/', methods=('GET', 'POST'))
+def create():
+    form = CourseForm()
+    if form.validate_on_submit():
+        courses_list.append({'title': form.title.data,
+                             'description': form.description.data,
+                             'price': form.price.data,
+                             'available': form.available.data,
+                             'level': form.level.data
+                             })
+        return redirect(url_for('index'))
+    return render_template('create.html', form=form)
 
 @app.route('/comments/')
 def comments():
@@ -32,20 +50,6 @@ def comments():
 def about():
     return render_template('about.html')
 
-@app.route('/create/', methods=('GET', 'POST'))
-def create():
-    if request.method == 'POST':
-        title = request.form['title']
-        content = request.form['content']
-
-        if not title:
-            flash('Title is required!')
-        elif not content:
-            flash('Content is required!')
-        else:
-            messages.append({'title': title, 'content': content})
-            return redirect(url_for('index'))
-    return render_template('create.html')
 
 # NOT Required
 # @app.route('/capitalize/<word>/')
