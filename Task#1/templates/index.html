@@ -2,10 +2,18 @@
 
 {% block content %}
     <h1>{% block title %} Welcome! {% endblock %}</h1>
-    {% for message in messages %}
-        <div class='message'>
-            <h3>{{ message['title'] }}</h3>
-            <p>{{ message['content'] }}</p>
+    {% for course in courses_list %}
+        <div class='courses'>
+            <h2> {{ course['title'] }} </h2>
+            <h4> {{ course['description'] }} </h4>
+            <p> {{ course['price'] }}$ </p>
+            <p><i>({{ course['level'] }})</i></p>
+            <p>Availability:
+                {% if course['available'] %}
+                    Available
+                {% else %}
+                    Not Available
+                {% endif %}</p>
         </div>
     {% endfor %}
 {% endblock %}

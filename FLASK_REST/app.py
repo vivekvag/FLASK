@@ -42,9 +42,6 @@ products_schema = ProductSchema(many=True)
 #Create a Product
 @app.route('/product', methods=['POST'])
 def add_product():
-    data = request.get_json()
-    print(data)
-    
     name = request.json['name']
     description = request.json['description']
     price = request.json['price']
