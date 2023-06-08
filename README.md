@@ -6,9 +6,9 @@ To get started with Flask, navigate to the project's root directory and run the 
 - `pip install virtualenv`
 - `virtualenv env`
 - For Mac OS / Linux :
-  `source env/bin/activate`
+  -- `source env/bin/activate`
 - For Windows:
-  `env\Scripts\activate`
+  -- `env\Scripts\activate`
 
 ## Usage
 To use the code examples in this repository, clone the repository to your local machine:
