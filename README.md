@@ -4,9 +4,9 @@ This repository contains examples and resources for working with Flask, a popula
 ## Getting Started
 To get started with Flask, navigate to the project's root directory and run the following commands.
 - `pip install virtualenv`
-- `virtualenv env`
+- `python -m virtualenv`
 - For Mac OS / Linux :
-  -- `source env/bin/activate`
+  -- `source env/Scripts/activate`
 - For Windows:
   -- `env\Scripts\activate`
 
